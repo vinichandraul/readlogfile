@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: readlogfile
+spec:
+  selector:
+    app: readlogfile
+  ports:
+  - port: 9090
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: readlogfile
+  labels:
+    app: readlogfile
+spec:
+  selector:
+    matchLabels:
+      app: readlogfile
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: readlogfile
+    spec:
+      containers:
+      - name: readlogfile
+        image: docker.io/tmouli/readlogfile:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DISABLE_WEB_APP
+          value: "false"
