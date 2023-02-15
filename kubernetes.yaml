@@ -6,7 +6,7 @@ spec:
   selector:
     app: readlogfile
   ports:
-  - port: 9090
+  - port: 8080
   type: NodePort
 ---
 apiVersion: apps/v1
